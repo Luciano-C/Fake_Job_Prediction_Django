@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="container py-5 text-center">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form method="POST">
+                {% csrf_token %}
+                <!-- For simplicity we are going to consider only the columns that seem more relevant and those will be: title, location, company_profile, description, requirements, benefits, has_questions, employment_type, required_experience and requiered_education
+             -->
+                <input id="title" name="title" type="text" placeholder="Title" class="form-control my-4"
+                    value="{{value_title}}">
+
+                <select name="location" id="location" class="form-select my-4">
+                    <option value="" selected>Select a location:</option>
+                    {% for location in possible_locations %}
+                    <option value="{{location}}">{{location}}</option>
+                    {% endfor %}
+                </select>
+
+
+                <textarea id="company_profile" name="company_profile" placeholder="Company Profile"
+                    class="form-control my-4" value="{{value_company_profile}}">
+                </textarea>
+
+
+                <textarea id="description" name="description" type="text" placeholder="Description"
+                    class="form-control my-4" value="{{value_description}}">
+                </textarea>
+
+                <textarea id="requirements" name="requirements" type="text" placeholder="Requirements"
+                    class="form-control my-4" value="{{value_requirements}}">
+                </textarea>
+
+                <textarea id="benefits" name="benefits" type="text" placeholder="Benefits" class="form-control my-4"
+                    value="{{value_benefits}}">
+                </textarea>
+
+                <select id="has_questions" name="has_questions" class="form-select my-4">
+                    <option value="" selected>Has questions?</option>
+                    <option value="1">True</option>
+                    <option value="0">False</option>
+
+                </select>
+
+                <select id="employment_type" name="employment_type" class="form-select my-4">
+                    <option value="" selected>Select an Employment Type:</option>
+                    {% for employment_type in possible_employment_types %}
+                    <option value="{{employment_type}}">{{employment_type}}</option>
+                    {% endfor %}
+                </select>
+
+                <select id="required_experience" name="required_experience" class="form-select my-4">
+                    <option value="" selected>Select a Required Experience:</option>
+                    {% for required_experience in possible_required_experience %}
+                    <option value="{{required_experience}}">{{required_experience}}</option>
+                    {% endfor %}
+                </select>
+
+                
+
+                <select id="required_education" name="required_education" class="form-select my-4">
+                    <option value="" selected>Select a Required Education:</option>
+                    {% for required_education in possible_required_education %}
+                    <option value="{{required_education}}">{{required_education}}</option>
+                    {% endfor %}
+                </select>
+
+                <button class="btn btn-secondary">Predict</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}
