@@ -6,5 +6,5 @@ from .views import *
 #app_name = "passwords" 
 
 urlpatterns = [
-    
+    path("", home, name="home")
 ]
