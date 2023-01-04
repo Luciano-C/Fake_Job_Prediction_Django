@@ -1,0 +1,19 @@
+.close {
+    color: black;
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1;
+    opacity: 0.5;
+    text-shadow: none;
+  }
+  
+  .close:hover {
+    color: #fff;
+    opacity: 0.75;
+  }
+
+  .messages li {
+    display: flex;
+    justify-content: space-between;
+  }
+
