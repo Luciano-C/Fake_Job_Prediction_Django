@@ -9,13 +9,18 @@ def home(request):
 
 def prediction(request):
     
+    # Get dictionary from picke file which will be used to populate the options on select elements in prediction.html
     form_input_data = pd.read_pickle('model/form_input_data.pickle')
+    
+    # Store the dictionary data in different variables
     possible_locations = sorted(form_input_data['possible_locations'])
     possible_employment_types = form_input_data['possible_employment_types']
     possible_required_experience = form_input_data['possible_required_experience']
     possible_required_education = form_input_data['possible_required_education']
 
+    # Get logistic regression model from pickle file
     model = pd.read_pickle('model/prediction_model.pickle')
+    # Get TfidfVectorizer instance from pickle file
     feature_extraction = pd.read_pickle('model/feature_extraction.pickle')
     
 
@@ -29,7 +34,8 @@ def prediction(request):
         })
     
     else:
-
+        # Remove the white spaces at the start and end from each input
+        # Select/option have some optiones named UNKNOWN or UNKNOWN/OTHER replacing empty strings in the original dataframe, if those options are being selected, an empty string is being assigned so is consistent with the model
         title = request.POST['title'].strip()
         
         if request.POST['location'] == 'UNKNOWN/OTHER':
@@ -59,24 +65,25 @@ def prediction(request):
             required_education = request.POST['required_education'].strip()
 
         
-
+        # The input is concatenated in the same way the model was generated
         text = title + ' - ' + location + ' - ' + company_profile + ' - ' + description + ' - ' + requirements +  ' - ' + benefits + ' - ' + has_questions + ' - ' + employment_type + ' - ' + required_experience + ' - ' + required_education
 
-
+        # This concatenated text is storaged in a dataframe with the same structure that the one used to adjust the model, one column named 'text'
         df_to_process = pd.DataFrame(data={'text': [text]})
+        # The column is transformed using the TfidfVectorizer instance
         prediction_features = feature_extraction.transform(df_to_process['text'])
+        # The transformed column is used to generate a prediction
         prediction = model.predict(prediction_features)
 
+        # A message to the user is generated depending on the prediction. The messages framework is used and sent as a flash alert
         if prediction[0] == 0:
-            message_to_user = 'True job offer'
+            message_to_user = 'The offer is most likely true.'
             messages.success(request, message_to_user)
         else:
-            message_to_user = 'Fake job offer'
+            message_to_user = 'The offer is most likely fake.'
             messages.error(request, message_to_user)
 
-        
-       
-        
+
         return render(request, 'prediction.html', {
             'value_title': request.POST['title'],
             'value_location': request.POST['location'],

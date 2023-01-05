@@ -7,9 +7,11 @@
         <div class="col px-5 offset-3">
             <section class="card card-body " style="width: 35rem;">
                 <img src="{% static 'images/logo.png' %}" alt="...">
-                <p class="align-middle">Don't waste time applying to job offers that lead to nowhere.</p>
+                <p class="align-middle">Protect yourself from fraud with our machine learning app.</p>
+                <p>Enter the job details and let our model predict if it's genuine or a scam.</p>
+                <p> Try it out now!</p>
                 <div class="text-center">
-                    <a class="btn btn-primary custom-button" href="#">
+                    <a class="btn btn-primary custom-button" href="{% url 'prediction' %}">
                         Predict
                     </a>  
                 </div>

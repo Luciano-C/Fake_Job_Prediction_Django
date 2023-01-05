@@ -10,8 +10,7 @@
         <div class="col-6 offset-3">
             <form method="POST">
                 {% csrf_token %}
-                <!-- For simplicity we are going to consider only the columns that seem more relevant and those will be: title, location, company_profile, description, requirements, benefits, has_questions, employment_type, required_experience and requiered_education
-             -->
+                
                 <input id="title" name="title" type="text" placeholder="Title" class="form-control my-4"
                     value="{{value_title}}">
 
@@ -21,7 +20,6 @@
                     <option value="{{location}}">{{location}}</option>
                     {% endfor %}
                 </select>
-
 
                 <textarea id="company_profile" name="company_profile" placeholder="Company Profile"
                     class="form-control my-4">{{value_company_profile}}</textarea>
@@ -56,8 +54,6 @@
                     <option value="{{required_experience}}">{{required_experience}}</option>
                     {% endfor %}
                 </select>
-
-
 
                 <select id="required_education" name="required_education" class="form-select my-4">
                     <option value="" selected>Select a Required Education:</option>
