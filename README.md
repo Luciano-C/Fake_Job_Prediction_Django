@@ -1,6 +1,6 @@
 ## <ins>About this project</ins>
 This project aims to practice some of the things I have been learning lately about Machine Learning, specifically about Logistic Regression and TfidfVectorizer from Scikit-Learn and being able to integrate those into a Django app.  
-The model evaluation in this case was purely based on accuracy score so there may be some options to optimize the model.
+Please note that because the main focus of this project was the integration, both the model and the app are relatively simple.
 
 
 ## <ins>To run Django project</ins>
